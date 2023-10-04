@@ -67,3 +67,16 @@ model Coffee {
     expires      DateTime
     
 }
+model Food {
+    id           String   @id @default(cuid())
+    name       String
+    expires      DateTime
+    
+}
+
+model Bill {
+    id           String   @id @default(cuid())
+    name       String
+    expires      DateTime
+    
+}
