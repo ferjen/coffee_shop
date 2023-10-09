@@ -6,6 +6,7 @@ import { z } from "zod";
 
 import {
   createTRPCRouter,
+  protectedProcedure,
   publicProcedure,
 } from "~/server/api/trpc";
 import { orderItemInput } from "~/types";
@@ -18,7 +19,7 @@ export const orderItemRouter = createTRPCRouter({
         greeting: `Hello ${input.text}`,
       };
     }),
-    create: publicProcedure
+    addOrderItem: publicProcedure
     .input(orderItemInput)
     .mutation(async ({ ctx, input }) => {
         return await ctx.db.orderItem.create({
@@ -46,5 +47,8 @@ export const orderItemRouter = createTRPCRouter({
               orderCode: input
           }
       });
+  }),
+  getSecretMessage: protectedProcedure.query(() => {
+    return "you can now see this secret message!";
   }),
 });

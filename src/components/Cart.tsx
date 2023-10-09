@@ -1,4 +1,5 @@
 import React from "react";
+import { api } from "~/utils/api";
 
 
 interface CartProps {
@@ -12,6 +13,8 @@ function Cart({ items, removeFromCart }: CartProps) {
     (total, item) => total + item.price * item.quantity,
     0,
   );
+
+  const {mutate} = api.orderItem.addOrderItem.useMutation()
 
   return (
     <div>
@@ -84,7 +87,31 @@ function Cart({ items, removeFromCart }: CartProps) {
           </tfoot>
         </table>
       </div>
-  
+      <button
+  className="text-medium mb-10 ml-32 rounded bg-yellow-900 px-16 py-3 font-bold uppercase text-white"
+  type="button"
+  onClick={(e) => {
+    e.preventDefault();
+    items.forEach((item, index) => {
+      setTimeout(() => {
+        mutate({
+          order: {
+            connect: {
+              orderCode: "asd9123",
+            },
+          },
+          coffeeName: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          orderCode: "asd9123",
+        });
+      }, index * 500); // Delay in milliseconds (e.g., 1000ms = 1 second)
+    });
+
+}}
+>
+  Add Order
+</button>
     </div>
   );
 }
