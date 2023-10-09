@@ -69,6 +69,7 @@ model Coffee {
 
 model Order {
   id                String   @id @default(cuid())
+  orderCode         String  @unique
   name              String
   contact           String
   address           String
@@ -79,9 +80,9 @@ model Order {
 
 model OrderItem {
   id         String   @id @default(cuid())
-  orderId    String
+  orderCode  String
   coffeeName String
   quantity   Int
-  order      Order    @relation(fields: [orderId], references: [id])
+  order      Order    @relation(fields: [orderCode], references: [orderCode])
   price      Float
 }

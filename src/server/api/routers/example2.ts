@@ -5,24 +5,27 @@ import { z } from "zod";
 
 import {
   createTRPCRouter,
-  protectedProcedure,
   publicProcedure,
 } from "~/server/api/trpc";
 
-export const router = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
+export const orderRouter = createTRPCRouter({
+  createOrder: publicProcedure
+    .input(z.object({
+        orderCode: z.string().nonempty({ message: 'Order code is required' }),
+        name: z.string().nonempty({ message: 'Name is required' }),
+        contact: z.string().nonempty({ message: 'Contact is required' }),
+        address: z.string().nonempty({ message: 'Address is required' }),
+    }))
+    .mutation(async ({ ctx, input }) => {
+        return await ctx.db.order.create({
+            data: {
+                orderCode: input.orderCode,
+                name: input.name,
+                contact: input.contact,
+                address: input.address,
+                total: 0,
+                done: false,
+            },
+        });
     }),
-
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.db.example.findMany();
-  }),
-
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!";
-  }),
 });

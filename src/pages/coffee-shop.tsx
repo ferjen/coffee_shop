@@ -1,10 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { useSession } from "next-auth/react";
 import React, { useState } from "react";
+import { AddOrderItem } from "~/components/AddOrderItem";
 import Cards from "~/components/Cards";
 import Cart from "~/components/Cart";
 import Checkout from "~/components/Checkout";
 import NavBar from "~/components/NavBar";
 
 function CoffeeShop() {
+  const { data: sessionData } = useSession();
+
+  console.log(sessionData?.user)
   const cardsData = [
     {
       title: "Espresso",
@@ -67,9 +75,11 @@ function CoffeeShop() {
     <div>
       <NavBar />
       <Cards cards={cardsData} addToCart={addToCart} />
+      <AddOrderItem/>
       <Cart items={cartItems} removeFromCart={removeFromCart} />
       <Checkout />
-    </div>
+      
+    </div>  
   );
 }
 

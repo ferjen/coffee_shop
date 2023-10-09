@@ -1,5 +1,6 @@
 import React from "react";
 
+
 interface CartProps {
   items: { name: string; price: number; quantity: number }[];
   removeFromCart: (index: number) => void;
@@ -14,6 +15,7 @@ function Cart({ items, removeFromCart }: CartProps) {
 
   return (
     <div>
+      
       <h2 className="mb-4 ml-32 mt-20 text-4xl font-bold">Cart</h2>
       <div className="relative mx-32 mb-10 overflow-x-auto shadow-lg">
         <table className="w-full text-left text-lg text-gray-900">
@@ -82,6 +84,7 @@ function Cart({ items, removeFromCart }: CartProps) {
           </tfoot>
         </table>
       </div>
+  
     </div>
   );
 }
