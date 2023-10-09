@@ -45,7 +45,7 @@ model Session {
 model User {
     id            String    @id @default(cuid())
     name          String?
-    type          String? 
+    type          String?
     email         String?   @unique
     emailVerified DateTime?
     image         String?
@@ -63,20 +63,25 @@ model VerificationToken {
 
 model Coffee {
     id           String   @id @default(cuid())
-    name       String
-    expires      DateTime
-    
-}
-model Food {
-    id           String   @id @default(cuid())
-    name       String
-    expires      DateTime
-    
+    name         String
+    price        Float  
 }
 
-model Bill {
-    id           String   @id @default(cuid())
-    name       String
-    expires      DateTime
-    
+model Order {
+  id                String   @id @default(cuid())
+  name              String
+  contact           String
+  address           String
+  items             OrderItem[]
+  total             Float
+  done              Boolean @default(false)
+}
+
+model OrderItem {
+  id         String   @id @default(cuid())
+  orderId    String
+  coffeeName String
+  quantity   Int
+  order      Order    @relation(fields: [orderId], references: [id])
+  price      Float
 }
