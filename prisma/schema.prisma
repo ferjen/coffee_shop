@@ -14,17 +14,9 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Example {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    @@index([name])
-}
-
 // Necessary for Next auth
 model Account {
+
     id                String  @id @default(cuid())
     userId            String
     type              String
@@ -53,6 +45,7 @@ model Session {
 model User {
     id            String    @id @default(cuid())
     name          String?
+    type          String? 
     email         String?   @unique
     emailVerified DateTime?
     image         String?
@@ -66,4 +59,24 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Coffee {
+    id           String   @id @default(cuid())
+    name       String
+    expires      DateTime
+    
+}
+model Food {
+    id           String   @id @default(cuid())
+    name       String
+    expires      DateTime
+    
+}
+
+model Bill {
+    id           String   @id @default(cuid())
+    name       String
+    expires      DateTime
+    
 }
