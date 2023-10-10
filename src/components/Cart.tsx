@@ -1,4 +1,6 @@
 import React from "react";
+import { api } from "~/utils/api";
+
 
 interface CartProps {
   items: { name: string; price: number; quantity: number }[];
@@ -12,8 +14,11 @@ function Cart({ items, removeFromCart }: CartProps) {
     0,
   );
 
+  const {mutate} = api.orderItem.addOrderItem.useMutation()
+
   return (
     <div>
+      
       <h2 className="mb-4 ml-32 mt-20 text-4xl font-bold">Cart</h2>
       <div className="relative mx-32 mb-10 overflow-x-auto shadow-lg">
         <table className="w-full text-left text-lg text-gray-900">
@@ -82,6 +87,31 @@ function Cart({ items, removeFromCart }: CartProps) {
           </tfoot>
         </table>
       </div>
+      <button
+  className="text-medium mb-10 ml-32 rounded bg-yellow-900 px-16 py-3 font-bold uppercase text-white"
+  type="button"
+  onClick={(e) => {
+    e.preventDefault();
+    items.forEach((item, index) => {
+      setTimeout(() => {
+        mutate({
+          order: {
+            connect: {
+              orderCode: "asd9123",
+            },
+          },
+          coffeeName: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          orderCode: "asd9123",
+        });
+      }, index * 500); // Delay in milliseconds (e.g., 1000ms = 1 second)
+    });
+
+}}
+>
+  Add Order
+</button>
     </div>
   );
 }
