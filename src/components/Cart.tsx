@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from "react";
 import { api } from "~/utils/api";
 
@@ -97,13 +100,13 @@ function Cart({ items, removeFromCart }: CartProps) {
         mutate({
           order: {
             connect: {
-              orderCode: "asd9123",
+              orderCode: "123asd",
             },
           },
           coffeeName: item.name,
           price: item.price,
           quantity: item.quantity,
-          orderCode: "asd9123",
+          orderCode: "123asd",
         });
       }, index * 500); // Delay in milliseconds (e.g., 1000ms = 1 second)
     });
