@@ -12,7 +12,7 @@ import NavBar from "~/components/NavBar";
 function CoffeeShop() {
   const { data: sessionData } = useSession();
 
-  console.log(sessionData?.user)
+  console.log(sessionData?.user);
   const cardsData = [
     {
       title: "Espresso",
@@ -75,11 +75,10 @@ function CoffeeShop() {
     <div>
       <NavBar />
       <Cards cards={cardsData} addToCart={addToCart} />
-      <AddOrderItem/>
+      <AddOrderItem />
       <Cart items={cartItems} removeFromCart={removeFromCart} />
-      <Checkout />
-      
-    </div>  
+      <Checkout items={cartItems} />
+    </div>
   );
 }
 
