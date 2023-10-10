@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -15,6 +16,7 @@ export const orderRouter = createTRPCRouter({
         name: z.string().nonempty({ message: 'Name is required' }),
         contact: z.string().nonempty({ message: 'Contact is required' }),
         address: z.string().nonempty({ message: 'Address is required' }),
+        total: z.number(),
     }))
     .mutation(async ({ ctx, input }) => {
         return await ctx.db.order.create({
@@ -23,9 +25,16 @@ export const orderRouter = createTRPCRouter({
                 name: input.name,
                 contact: input.contact,
                 address: input.address,
-                total: 0,
+                total: input.total,
                 done: false,
             },
         });
     }),
+    getAllOrder: publicProcedure.query(({ ctx }) => {
+        return ctx.db.order.findMany({
+          include: {
+            items: true,
+          },
+        });
+      }),
 });
