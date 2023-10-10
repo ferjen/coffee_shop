@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
@@ -43,7 +44,7 @@ const Cards: React.FC<Props> = ({ cards, addToCart }) => {
       const updatedQuantities = [...prevQuantities];
       updatedQuantities[index] = Math.max(
         0,
-        (updatedQuantities[index] || 0) - 1,
+        (updatedQuantities[index] ?? 0) - 1,
       );
       return updatedQuantities;
     });

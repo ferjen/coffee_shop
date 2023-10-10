@@ -75,7 +75,6 @@ function CoffeeShop() {
     <div>
       <NavBar />
       <Cards cards={cardsData} addToCart={addToCart} />
-      <AddOrderItem />
       <Cart items={cartItems} removeFromCart={removeFromCart} />
       <Checkout items={cartItems} />
     </div>
