@@ -2,8 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from "react";
-import { api } from "~/utils/api";
-
 
 interface CartProps {
   items: { name: string; price: number; quantity: number }[];
@@ -17,11 +15,8 @@ function Cart({ items, removeFromCart }: CartProps) {
     0,
   );
 
-  const {mutate} = api.orderItem.addOrderItem.useMutation()
-
   return (
     <div>
-      
       <h2 className="mb-4 ml-32 mt-20 text-4xl font-bold">Cart</h2>
       <div className="relative mx-32 mb-10 overflow-x-auto shadow-lg">
         <table className="w-full text-left text-lg text-gray-900">
