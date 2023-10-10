@@ -13,7 +13,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [address, setAddress] = useState("");
-  const [payment, setPayment] = useState("");
+  // const [payment, setPayment] = useState("");
 
   const orderCode =  orderCodeGenerator();
   const [total, setTotalAmount] = useState<number>(0); // Initialize totalAmount to 0
@@ -28,22 +28,22 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
     setTotalAmount(calculatedTotalAmount);
   }, [items]);
 
-  const handlePayment = () => {
-    // Handle payment submission here
-    // You can access the input values in the name, email, address, and payment variables.
-    const data = {
-      name,
-      contact,
-      address,
-      payment,
-      items,
-      total
-    };
-    console.log(data)
+  // const handlePayment = () => {
+  //   // Handle payment submission here
+  //   // You can access the input values in the name, email, address, and payment variables.
+  //   const data = {
+  //     name,
+  //     contact,
+  //     address,
+  //     payment,
+  //     items,
+  //     total
+  //   };
+  //   console.log(data)
 
-    // Close the modal after handling payment
-    setShowModal(false);
-  };
+  //   // Close the modal after handling payment
+  //   setShowModal(false);
+  // };
 
   return (
     <>
@@ -153,27 +153,32 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
                   type="button"
                   onClick={(e)=>{
                     e.preventDefault();
+                    setShowModal(false);
                     console.log(orderCode);
                     mutate({
                       name, contact, address, orderCode,total
                     });
-                    items.forEach((item, index) => {
-                      setTimeout(() => {
-                        addItems.mutate({
-                          order: {
-                            connect: {
-                              orderCode: orderCode,
+                  
+                    // Insert a delay here
+                    setTimeout(() => {
+                      items.forEach((item, index) => {
+                        setTimeout(() => {
+                          addItems.mutate({
+                            order: {
+                              connect: {
+                                orderCode: orderCode,
+                              },
                             },
-                          },
-                          coffeeName: item.name,
-                          price: item.price,
-                          quantity: item.quantity,
-                          orderCode: orderCode,
-                        });
-                      }, index * 500); // Delay in milliseconds (e.g., 1000ms = 1 second)
-                    });
-                  }
-                  }
+                            coffeeName: item.name,
+                            price: item.price,
+                            quantity: item.quantity,
+                            orderCode: orderCode,
+                          });
+                        }, index * 500); // Delay in milliseconds (e.g., 1000ms = 1 second)
+                      });
+                    }, 500); // 2000ms = 2 seconds delay
+                  }}
+                  
                 >
                   Pay Now
                 </button>
