@@ -1,6 +1,6 @@
 import { orderItemRouter } from "~/server/api/routers/orderItemRouter";
 import { createTRPCRouter } from "~/server/api/trpc";
-import { orderRouter } from "./routers/example2";
+import { orderRouter } from "./routers/orderRouter";
 
 /**
  * This is the primary router for your server.

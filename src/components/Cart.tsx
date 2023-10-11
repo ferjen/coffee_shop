@@ -85,31 +85,6 @@ function Cart({ items, removeFromCart }: CartProps) {
           </tfoot>
         </table>
       </div>
-      <button
-  className="text-medium mb-10 ml-32 rounded bg-yellow-900 px-16 py-3 font-bold uppercase text-white"
-  type="button"
-  onClick={(e) => {
-    e.preventDefault();
-    items.forEach((item, index) => {
-      setTimeout(() => {
-        mutate({
-          order: {
-            connect: {
-              orderCode: "123asd",
-            },
-          },
-          coffeeName: item.name,
-          price: item.price,
-          quantity: item.quantity,
-          orderCode: "123asd",
-        });
-      }, index * 500); // Delay in milliseconds (e.g., 1000ms = 1 second)
-    });
-
-}}
->
-  Add Order
-</button>
     </div>
   );
 }

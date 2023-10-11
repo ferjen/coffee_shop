@@ -12,13 +12,6 @@ import {
 import { orderItemInput } from "~/types";
 
 export const orderItemRouter = createTRPCRouter({
-  hello: publicProcedure
-    // .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello adasd`,
-      };
-    }),
     addOrderItem: publicProcedure
     .input(orderItemInput)
     .mutation(async ({ ctx, input }) => {
@@ -48,7 +41,23 @@ export const orderItemRouter = createTRPCRouter({
           }
       });
   }),
-  getSecretMessage: protectedProcedure.query(() => {
+  getSecretMessage: publicProcedure.query(() => {
     return "you can now see this secret message!";
   }),
+  createTodo: publicProcedure
+  // define the expected argument for validation
+    .input(
+      z
+        .object({
+          message: z.string(),
+        })
+        .optional()
+    )
+    // define the implementation destructuring the validated input
+    // can destructure rawInput if not using validation
+    .mutation(({input}) => {
+      console.log(input);
+      return "Complete";
+    }),
+  
 });
