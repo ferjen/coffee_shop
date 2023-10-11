@@ -1,76 +1,89 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { api } from "~/utils/api";
-
-type OrderItem = {
-  id: string;
-  coffeeName: string;
-  quantity: number;
-  price: number;
-};
-
-type Order = {
-  id: string;
-  orderCode: string;
-  name: string;
-  contact: string;
-  address: string;
-  total: number;
-  done: boolean;
-  items: OrderItem[];
-};
+import NavBar from "./NavBar";
 
 const Orders = () => {
- 
+  const { data: orders, isLoading, isError } = api.order.getAllOrder.useQuery();
 
-  const {data:orders} = api.order.getAllOrder.useQuery();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  console.log(orders)
+  if (isError) {
+    return <div>Error loading orders.</div>;
+  }
+
   return (
     <>
-    
-    {/* {orders?.length ? orders.map(order=>{
-        return <
-    })} */}
+      <NavBar />
+      <div className="mt-40 flex items-center justify-center mb-12 text-4xl font-bold"> List of Ordered Items</div>
+      <div className="flex items-center justify-center">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+          {orders.map((order, index) => (
+            <div key={order.id} className="sha mb-4 border p-4">
+              <h2 className="mb-2 text-2xl font-bold">Order {index + 1}</h2>
+              <div>
+                <span className="ml-4 mr-6 text-lg">Name:</span> {order.name}
+              </div>
+              <div>
+                <span className="ml-4 mr-2 text-lg">Contact:</span>{" "}
+                {order.contact}
+              </div>
+              <div>
+                <span className="ml-4 mr-2 text-lg">Address:</span>{" "}
+                {order.address}
+              </div>
+              <div>
+                <span className="ml-4 mr-8 text-lg">Total:</span> {order.total}
+              </div>
+              <div className="ml-4 mt-4">
+                <span className="text-lg font-medium"> Items: </span>
+                <table>
+                  <thead className="bg-yellow-800">
+                    <tr>
+                      <th
+                        scope="col"
+                        className="border border-gray-800 px-6 py-3 text-center"
+                      >
+                        Coffee Name
+                      </th>
+                      <th
+                        scope="col"
+                        className="border border-gray-800 px-6 py-3 text-center"
+                      >
+                        Quantity
+                      </th>
+                      <th
+                        scope="col"
+                        className="border border-gray-800 px-6 py-3 text-center"
+                      >
+                        Price
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {order.items.map((item) => (
+                      <tr key={item.id}>
+                        <td className="border border-gray-800 py-2 text-center">
+                          {item.coffeeName}
+                        </td>
+                        <td className="border border-gray-800 py-2 text-center">
+                          {" "}
+                          {item.quantity}
+                        </td>
+                        <td className="border border-gray-800 py-2 text-center">
+                          {item.price}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
-    // <div>
-    //   <table>
-    //     <thead>
-    //       <tr>
-    //         <th>Order Code</th>
-    //         <th>Name</th>
-    //         <th>Contact</th>
-    //         <th>Address</th>
-    //         <th>Total</th>
-    //         <th>Items</th>
-    //       </tr>
-    //     </thead>
-    //     <tbody>
-    //       {data.map(order => (
-    //         <tr key={order.id}>
-    //           <td>{order.orderCode}</td>
-    //           <td>{order.name}</td>
-    //           <td>{order.contact}</td>
-    //           <td>{order.address}</td>
-    //           <td>{order.total}</td>
-    //           <td>
-    //             {order.items.map(item => (
-    //               <div key={item.id}>
-    //                 <p>{item.coffeeName}</p>
-    //                 <p>{item.quantity}</p>
-    //                 <p>{item.price}</p>
-    //               </div>
-    //             ))}
-    //           </td>
-    //         </tr>
-    //       ))}
-    //     </tbody>
-    //   </table>
-    // </div>
   );
 };
 
