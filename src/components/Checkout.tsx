@@ -1,4 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useEffect, useState } from "react";
+import { api } from "~/utils/api";
+import {  orderCodeGenerator } from "./randomCodeGen";
 
 interface CheckoutProps {
   items: { name: string; price: number; quantity: number }[];
@@ -9,10 +13,12 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [address, setAddress] = useState("");
-  const [payment, setPayment] = useState("");
-  const [totalAmount, setTotalAmount] = useState<number>(0); // Initialize totalAmount to 0
+  // const [payment, setPayment] = useState("");
 
-  // Use useEffect to update totalAmount whenever items changes
+  const orderCode =  orderCodeGenerator();
+  const [total, setTotalAmount] = useState<number>(0); // Initialize totalAmount to 0
+  const {mutate} = api.order.createOrder.useMutation()
+  const addItems = api.orderItem.addOrderItem.useMutation(); 
   useEffect(() => {
     // Calculate the total amount from the items in the cart
     const calculatedTotalAmount = items.reduce(
@@ -22,22 +28,22 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
     setTotalAmount(calculatedTotalAmount);
   }, [items]);
 
-  const handlePayment = () => {
-    // Handle payment submission here
-    // You can access the input values in the name, email, address, and payment variables.
-    const data = {
-      name,
-      contact,
-      address,
-      payment,
-      items,
-      totalAmount
-    };
-    console.log(data)
+  // const handlePayment = () => {
+  //   // Handle payment submission here
+  //   // You can access the input values in the name, email, address, and payment variables.
+  //   const data = {
+  //     name,
+  //     contact,
+  //     address,
+  //     payment,
+  //     items,
+  //     total
+  //   };
+  //   console.log(data)
 
-    // Close the modal after handling payment
-    setShowModal(false);
-  };
+  //   // Close the modal after handling payment
+  //   setShowModal(false);
+  // };
 
   return (
     <>
@@ -92,15 +98,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
                     className="w-full rounded border p-2"
                   />
                 </label>
-                <label className="mb-4 block">
-                  Payment Amount:
-                  <input
-                    type="number"
-                    value={payment}
-                    onChange={(e) => setPayment(e.target.value)}
-                    className="w-full rounded border p-2"
-                  />
-                </label>
+              
                 <table className="w-full text-left text-lg text-gray-900">
                   <thead className="bg-yellow-900 text-lg uppercase text-white">
                     <tr>
@@ -143,7 +141,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
                 <label className="mb-4 mt-4 block">
                   Total Price:{" "}
                   <strong className="font-bold">
-                    ₱{totalAmount.toFixed(2)}
+                    ₱{total.toFixed(2)}
                   </strong>
                 </label>
               </div>
@@ -153,7 +151,34 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
                 <button
                   className="mb-1 mr-1 rounded bg-blue-700 px-6 py-2 uppercase text-white"
                   type="button"
-                  onClick={handlePayment}
+                  onClick={(e)=>{
+                    e.preventDefault();
+                    setShowModal(false);
+                    console.log(orderCode);
+                    mutate({
+                      name, contact, address, orderCode,total
+                    });
+                  
+                    // Insert a delay here
+                    setTimeout(() => {
+                      items.forEach((item, index) => {
+                        setTimeout(() => {
+                          addItems.mutate({
+                            order: {
+                              connect: {
+                                orderCode: orderCode,
+                              },
+                            },
+                            coffeeName: item.name,
+                            price: item.price,
+                            quantity: item.quantity,
+                            orderCode: orderCode,
+                          });
+                        }, index * 500); // Delay in milliseconds (e.g., 1000ms = 1 second)
+                      });
+                    }, 500); // 2000ms = 2 seconds delay
+                  }}
+                  
                 >
                   Pay Now
                 </button>

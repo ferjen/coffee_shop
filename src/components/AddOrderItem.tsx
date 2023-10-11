@@ -9,6 +9,7 @@ export function AddOrderItem() {
     const [contact,setNewContact] = useState('')
     const [address,setNewAddress] = useState('')
     const [orderCode,setNewOrderCode] = useState('')
+    const [total,setNewTotal] = useState(0)
     const {mutate} = api.order.createOrder.useMutation()
 	return (
 		<div className="mt-40 flex items-center justify-center">
@@ -21,7 +22,7 @@ export function AddOrderItem() {
                     console.log("not vallid")
                 }
                 //create to order
-                mutate({name, contact, address, orderCode});
+                mutate({name, contact, address, orderCode,total});
             }}>
 				<input
 					className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
