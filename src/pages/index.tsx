@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import Link from "next/link";
 import NavBar from "~/components/NavBar";
 
 export default function Home() {
+ 
   return (
     <div>
       <NavBar />
@@ -14,6 +17,7 @@ export default function Home() {
             <Link
               href="/coffee-shop"
               className="rounded-lg bg-yellow-900 px-16 py-3 text-center text-lg font-bold text-white hover:bg-yellow-800"
+              
             >
               ORDER NOW
             </Link>

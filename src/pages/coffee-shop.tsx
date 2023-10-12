@@ -12,6 +12,8 @@ import NavBar from "~/components/NavBar";
 import { api } from "~/utils/api";
 
 function CoffeeShop() {
+  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const {data:coffee, isLoading,isError} = api.coffee.getAllCoffee.useQuery();
   if (isLoading) {
     return <div>Loading...</div>;
@@ -22,47 +24,46 @@ function CoffeeShop() {
   }
   const cardsData = [
     {
-      name: "Espresso",
+      title: "Espresso",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "espresso.jpeg",
       price: 90,
     },
     {
-      name: "Americano",
+      title: "Americano",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "americano.jpeg",
       price: 90,
     },
     {
-      name: "Latte",
+      title: "Latte",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "latte.jpeg",
       price: 90,
     },
 
     {
-      name: "Matcha",
+      title: "Matcha",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "matcha.jpeg",
       price: 120,
     },
 
     {
-      name: "Hot Chocolate",
+      title: "Hot Chocolate",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "chocolate.jpeg",
       price: 60,
     },
 
     {
-      name: "Mocha",
+      title: "Mocha",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "mocha.jpeg",
       price: 90,
     },
   ];
-  const [cartItems, setCartItems] = useState<any[]>([]);
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  
 
   // Adds an item to the cart.
   const addToCart = (item: any) => {
