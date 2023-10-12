@@ -1,14 +1,27 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import Cards from "~/components/Cards";
 import Cart from "~/components/Cart";
 import Checkout from "~/components/Checkout";
 import NavBar from "~/components/NavBar";
+import { api } from "~/utils/api";
 
 function CoffeeShop() {
-  const { data: sessionData } = useSession();
+  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const {data:coffee, isLoading,isError} = api.coffee.getAllCoffee.useQuery();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  console.log(sessionData?.user);
+  if (isError) {
+    return <div>Error loading orders.</div>;
+  }
   const cardsData = [
     {
       title: "Espresso",
@@ -50,8 +63,7 @@ function CoffeeShop() {
       price: 90,
     },
   ];
-  const [cartItems, setCartItems] = useState<any[]>([]);
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  
 
   // Adds an item to the cart.
   const addToCart = (item: any) => {
@@ -70,7 +82,7 @@ function CoffeeShop() {
   return (
     <div>
       <NavBar />
-      <Cards cards={cardsData} addToCart={addToCart} />
+      <Cards cards={coffee} addToCart={addToCart} />
       <Cart items={cartItems} removeFromCart={removeFromCart} />
       <Checkout items={cartItems} />
     </div>

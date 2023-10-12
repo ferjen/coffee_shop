@@ -72,6 +72,20 @@ async function main() {
       imageUrl: "mocha.jpeg",
       price: 90,
     },
+    {
+      id:'7',
+      title: "White Mocha",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      imageUrl: "mocha.jpeg",
+      price: 200,
+    },
+    {
+      id:'8',
+      title: "Capo",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      imageUrl: "mocha.jpeg",
+      price: 150,
+    },
   ];
 
   // eslint-disable-next-line prefer-const
