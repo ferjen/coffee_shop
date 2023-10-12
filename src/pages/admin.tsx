@@ -1,12 +1,10 @@
 import React from "react";
-import NavBar from "~/components/NavBar";
-import Orders from "~/components/orders";
+import Orders from "~/components/Orders";
 
 function Admin() {
   return (
     <>
-
-      <Orders/>
+      <Orders />
     </>
   );
 }
