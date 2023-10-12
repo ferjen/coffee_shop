@@ -1,6 +1,7 @@
 {
   "name": "coffee_project",
   "version": "0.1.0",
+  
   "private": true,
   "scripts": {
     "build": "next build",
@@ -8,7 +9,8 @@
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "seed": "node --experimental-specifier-resolution=node --loader ts-node/esm.mjs prisma/seed.ts"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
@@ -19,6 +21,7 @@
     "@trpc/next": "^10.37.1",
     "@trpc/react-query": "^10.37.1",
     "@trpc/server": "^10.37.1",
+    "install": "^0.13.0",
     "next": "^13.4.19",
     "next-auth": "^4.23.0",
     "react": "18.2.0",
@@ -48,6 +51,9 @@
   },
   "ct3aMetadata": {
     "initVersion": "7.20.2"
+  },
+  "prisma": {
+    "seed": "ts-node ./prisma/seed.ts"
   },
   "packageManager": "npm@9.6.7"
 }

@@ -6,13 +6,6 @@ import {
 import { orderItemInput } from "~/types";
 
 export const orderItemRouter = createTRPCRouter({
-  hello: publicProcedure
-    // .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello adasd`,
-      };
-    }),
     addOrderItem: publicProcedure
     .input(orderItemInput)
     .mutation(async ({ ctx, input }) => {
@@ -42,7 +35,8 @@ export const orderItemRouter = createTRPCRouter({
           }
       });
   }),
-  getSecretMessage: protectedProcedure.query(() => {
+  getSecretMessage: publicProcedure.query(() => {
     return "you can now see this secret message!";
   }),
+  
 });

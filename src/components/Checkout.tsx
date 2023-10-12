@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { api } from "~/utils/api";
-import { orderCodeGenerator } from "./RandomCodeGen";
+import { orderCodeGenerator } from "./randomCodeGen";
+
 
 interface CheckoutProps {
   items: { name: string; price: number; quantity: number }[];
