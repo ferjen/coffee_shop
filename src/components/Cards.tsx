@@ -1,9 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
 interface Card {
-  id:string,
+  id: string;
   name: string;
   description: string | null;
   imageUrl: string;
