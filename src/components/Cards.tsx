@@ -88,7 +88,7 @@ const Cards: React.FC<Props> = ({ cards, addToCart }) => {
 
               <div className="mt-4 flex">
                 <button
-                  className="flex items-center rounded-lg bg-yellow-900 px-4 py-2 text-white"
+                  className="flex items-center rounded-lg bg-yellow-900 px-4 py-2 text-white hover:bg-yellow-700"
                   onClick={() => handleAddToCart(index)}
                 >
                   <AiOutlineShoppingCart size={18} className="mr-2" />
