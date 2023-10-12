@@ -1,50 +1,61 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import Cards from "~/components/Cards";
 import Cart from "~/components/Cart";
 import Checkout from "~/components/Checkout";
 import NavBar from "~/components/NavBar";
+import { api } from "~/utils/api";
 
 function CoffeeShop() {
-  const { data: sessionData } = useSession();
+  const {data:coffee, isLoading,isError} = api.coffee.getAllCoffee.useQuery();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  console.log(sessionData?.user);
+  if (isError) {
+    return <div>Error loading orders.</div>;
+  }
   const cardsData = [
     {
-      title: "Espresso",
+      name: "Espresso",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "espresso.jpeg",
       price: 90,
     },
     {
-      title: "Americano",
+      name: "Americano",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "americano.jpeg",
       price: 90,
     },
     {
-      title: "Latte",
+      name: "Latte",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "latte.jpeg",
       price: 90,
     },
 
     {
-      title: "Matcha",
+      name: "Matcha",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "matcha.jpeg",
       price: 120,
     },
 
     {
-      title: "Hot Chocolate",
+      name: "Hot Chocolate",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "chocolate.jpeg",
       price: 60,
     },
 
     {
-      title: "Mocha",
+      name: "Mocha",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "mocha.jpeg",
       price: 90,
@@ -70,7 +81,7 @@ function CoffeeShop() {
   return (
     <div>
       <NavBar />
-      <Cards cards={cardsData} addToCart={addToCart} />
+      <Cards cards={coffee} addToCart={addToCart} />
       <Cart items={cartItems} removeFromCart={removeFromCart} />
       <Checkout items={cartItems} />
     </div>

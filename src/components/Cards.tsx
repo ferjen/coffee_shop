@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
 interface Card {
-  title: string;
-  description: string;
+  id:string,
+  name: string;
+  description: string | null;
   imageUrl: string;
   price: number;
 }
@@ -22,9 +23,9 @@ const Cards: React.FC<Props> = ({ cards, addToCart }) => {
 
   const handleAddToCart = (index: number) => {
     if (quantities[index] ?? (0 > 0 && cards[index])) {
-      const { title, price } = cards[index]!;
+      const { name, price } = cards[index]!;
       addToCart({
-        name: title,
+        name: name,
         price: price,
         quantity: quantities[index] ?? 0,
       });
@@ -58,9 +59,9 @@ const Cards: React.FC<Props> = ({ cards, addToCart }) => {
             key={index}
             className="max-w-sm overflow-hidden rounded shadow-lg"
           >
-            <img className="h-64 w-full" src={card.imageUrl} alt={card.title} />
+            <img className="h-64 w-full" src={card.imageUrl} alt={card.name} />
             <div className="px-6 py-4">
-              <div className="mb-2 text-xl font-bold">{card.title}</div>
+              <div className="mb-2 text-xl font-bold">{card.name}</div>
               <p className="text-base text-gray-700">{card.description}</p>
               <p className="mt-2 text-lg font-bold text-gray-700">
                 ₱{card.price}
