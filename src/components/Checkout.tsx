@@ -161,7 +161,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
                     }, 500);
                   }}
                 >
-                  Pay Now
+                  Place Order
                 </button>
               </div>
             </div>
