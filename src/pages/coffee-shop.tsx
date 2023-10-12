@@ -1,9 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
-import { AddOrderItem } from "~/components/AddOrderItem";
 import Cards from "~/components/Cards";
 import Cart from "~/components/Cart";
 import Checkout from "~/components/Checkout";

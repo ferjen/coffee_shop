@@ -1,9 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-import { z } from "zod";
-
 import {
   createTRPCRouter,
   protectedProcedure,
@@ -44,20 +38,5 @@ export const orderItemRouter = createTRPCRouter({
   getSecretMessage: publicProcedure.query(() => {
     return "you can now see this secret message!";
   }),
-  createTodo: publicProcedure
-  // define the expected argument for validation
-    .input(
-      z
-        .object({
-          message: z.string(),
-        })
-        .optional()
-    )
-    // define the implementation destructuring the validated input
-    // can destructure rawInput if not using validation
-    .mutation(({input}) => {
-      console.log(input);
-      return "Complete";
-    }),
   
 });
