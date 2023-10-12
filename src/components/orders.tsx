@@ -16,7 +16,10 @@ const Orders = () => {
   return (
     <>
       <NavBar />
-      <div className="mt-40 flex items-center justify-center mb-12 text-4xl font-bold"> List of Ordered Items</div>
+      <div className="mb-12 mt-40 flex items-center justify-center text-4xl font-bold">
+        {" "}
+        List of Ordered Items
+      </div>
       <div className="flex items-center justify-center">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
           {orders.map((order, index) => (

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { api } from "~/utils/api";
-import { orderCodeGenerator } from "./randomCodeGen";
-
+import { orderCodeGenerator } from "../lib/orderCodeGen";
 
 interface CheckoutProps {
   items: { name: string; price: number; quantity: number }[];
@@ -162,7 +161,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
                     }, 500);
                   }}
                 >
-                  Pay Now
+                  Place Order
                 </button>
               </div>
             </div>
