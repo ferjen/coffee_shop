@@ -1,5 +1,6 @@
 import React from "react";
-import Orders from "~/components/Orders";
+import Orders from "~/components/orders";
+
 
 
 function Admin() {
