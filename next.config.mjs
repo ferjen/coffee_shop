@@ -19,6 +19,7 @@ const config = {
   //   defaultLocale: "en",
   // },
   output: "export",
+  trailingSlash: true,
 };
 
 export default config;
