@@ -3,7 +3,6 @@ import Cards from "~/components/Cards";
 import Cart from "~/components/Cart";
 import Checkout from "~/components/Checkout";
 import NavBar from "~/components/NavBar";
-import { api } from "~/utils/api";
 
 function CoffeeShop() {
   const [cartItems, setCartItems] = useState<any[]>([]);
@@ -44,7 +43,7 @@ function CoffeeShop() {
       id: '5',
       name: "Hot Chocolate",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      imageUrl: "chocolate.jpeg",
+      imageUrl: "coffee.png",
       price: 60,
     },
 
