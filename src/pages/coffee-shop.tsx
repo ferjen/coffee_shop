@@ -13,45 +13,52 @@ function CoffeeShop() {
     return <div>Loading...</div>;
   }
 
+
   if (isError) {
     return <div>Error loading orders.</div>;
   }
   const cardsData = [
     {
-      title: "Espresso",
+      id: '1',
+      name: "Espresso",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "espresso.jpeg",
       price: 90,
     },
     {
-      title: "Americano",
+      id: '2',
+      name: "Americano",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "americano.jpeg",
       price: 90,
     },
     {
-      title: "Latte",
+      id: '3',
+      name: "Latte",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "latte.jpeg",
       price: 90,
     },
 
     {
-      title: "Matcha",
+      id: '4',
+      name: "Matcha",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "matcha.jpeg",
       price: 120,
     },
 
     {
-      title: "Hot Chocolate",
+      id: '5',
+      name: "Hot Chocolate",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "chocolate.jpeg",
       price: 60,
     },
 
     {
-      title: "Mocha",
+      id: '6',
+      name: "Mocha",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       imageUrl: "mocha.jpeg",
       price: 90,
@@ -76,7 +83,7 @@ function CoffeeShop() {
   return (
     <div>
       <NavBar />
-      <Cards cards={coffee} addToCart={addToCart} />
+      <Cards cards={cardsData} addToCart={addToCart} />
       <Cart items={cartItems} removeFromCart={removeFromCart} />
       <Checkout items={cartItems} />
     </div>
