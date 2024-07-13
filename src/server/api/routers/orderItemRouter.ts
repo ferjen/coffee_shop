@@ -1,4 +1,9 @@
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 import { orderItemInput } from "~/types";
 
 export const orderItemRouter = createTRPCRouter({

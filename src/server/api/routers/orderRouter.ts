@@ -31,4 +31,23 @@ export const orderRouter = createTRPCRouter({
       },
     });
   }),
+
+  toggleOrderDone: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        done: z.boolean(),
+      }),
+    )
+    .mutation(({ ctx, input }) => {
+      const { id, done } = input;
+      return ctx.db.order.update({
+        where: {
+          id,
+        },
+        data: {
+          done,
+        },
+      });
+    }),
 });

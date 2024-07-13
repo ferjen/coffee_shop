@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 
 const Orders = () => {
   const { data: orders, isLoading, isError } = api.order.getAllOrder.useQuery();
+  const {mutate} = api.order.toggleOrderDone.useMutation();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -81,6 +82,18 @@ const Orders = () => {
                     ))}
                   </tbody>
                 </table>
+                {/* toggle done */}
+              <button 
+              className="flex items-center rounded-lg bg-green-900 px- py-2 text-white"
+              onClick={(e)=>{
+                e.preventDefault();
+                mutate({
+                id: order.id,
+                done: true
+              })}}
+              >
+                  Done
+                </button>
               </div>
             </div>
           ))}

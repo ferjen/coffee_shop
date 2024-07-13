@@ -29,6 +29,7 @@ model Account {
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
+    @@index([userId])
 }
 
 model Session {
@@ -37,6 +38,8 @@ model Session {
     userId       String
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
 }
 
 model User {
@@ -84,4 +87,6 @@ model OrderItem {
   quantity   Int
   order      Order    @relation(fields: [orderCode], references: [orderCode])
   price      Float
+
+  @@index([orderCode])
 }

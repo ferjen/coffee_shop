@@ -156,7 +156,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
                             quantity: item.quantity,
                             orderCode: orderCode,
                           });
-                        }, index * 500); // Delay each item by 500ms
+                        }, index * 500); 
                       });
                     }, 500);
                   }}

@@ -1,0 +1,8 @@
+{
+  "incoming_source": {
+    "Path": "/tmp/ic-https-outcalls-adapter-socket.16717.1720853416"
+  },
+  "logger": {
+    "level": "error"
+  }
+}
