@@ -1,8 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai"
 const NavBar = () => {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,7 +22,7 @@ const NavBar = () => {
             alt="Logo"
             className="cursor-pointer"
           />
-          <div className="mt-11 text-2xl "> Ferjen Steve Coffee Shop </div>
+          <div className="mt-11 text-2xl "> Coffee Shop </div>
         </div>
 
         <div className="hidden lg:flex lg:items-center lg:justify-center">
