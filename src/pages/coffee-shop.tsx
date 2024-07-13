@@ -8,15 +8,7 @@ import { api } from "~/utils/api";
 function CoffeeShop() {
   const [cartItems, setCartItems] = useState<any[]>([]);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-  const {data:coffee, isLoading,isError} = api.coffee.getAllCoffee.useQuery();
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
-
-  if (isError) {
-    return <div>Error loading orders.</div>;
-  }
   const cardsData = [
     {
       id: '1',
