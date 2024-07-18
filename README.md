@@ -29,3 +29,5 @@ Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/ver
 
 
 curl https://raw.githubusercontent.com/ICPHubPH/workshop-auto-installer/main/installer.sh -o installer.sh
+
+https://icp-hub-ph.gitbook.io/manual/code-camp/local-environment-setup
